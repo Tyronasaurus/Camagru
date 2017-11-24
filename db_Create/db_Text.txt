@@ -1,0 +1,15 @@
+DROP DATABASE IF EXISTS accounts;
+
+CREATE DATABASE IF NOT EXISTS accounts;
+
+USE accounts;
+
+CREATE TABLE users (
+    `first_name` VARCHAR(50) NOT NULL,
+    `last_name` VARCHAR(50) NOT NULL,
+    `email` VARCHAR (255) NOT NULL,
+    `password` VARCHAR(1000) NOT NULL,
+    `id` INT(11) AUTO_INCREMENT NOT NULL,
+    `active` BOOLEAN NOT NULL DEFAULT 0,
+    PRIMARY KEY (`id`)
+)

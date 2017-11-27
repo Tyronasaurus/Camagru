@@ -29,57 +29,62 @@ document.getElementById("defaultOpen").click();
 //--------------------
 // GET USER MEDIA CODE
 //--------------------
-      navigator.getUserMedia = ( navigator.getUserMedia ||
-        navigator.webkitGetUserMedia ||
-        navigator.mozGetUserMedia ||
-        navigator.msGetUserMedia);
+    navigator.getUserMedia = (  navigator.getUserMedia ||
+                                navigator.webkitGetUserMedia ||
+                                navigator.mozGetUserMedia ||
+                                navigator.msGetUserMedia);
 
 var video;
 var webcamStream;
 
 
 function stopWebcam() {
-webcamStream.stop();
+    webcamStream.stop();
 }
 //---------------------
 // TAKE A SNAPSHOT CODE
 //---------------------
-var canvas, ctx;
+var canvas, ctx, overlay, octx;
 
 function init() {
-// Get the canvas and obtain a context for
-// drawing in it
-canvas = document.getElementById("myCanvas");
-ctx = canvas.getContext('2d');
-if (navigator.getUserMedia) {
-navigator.getUserMedia (
+    // Get the canvas and obtain a context for
+    // drawing in it
+    canvas = document.getElementById("myCanvas");
+    overlay = document.getElementById("myOverlay");
+    octx = overlay.getContext('2d');
+    ctx = canvas.getContext('2d');
+    if (navigator.getUserMedia) {
+        navigator.getUserMedia (
 
-// constraints
-{
-video: true,
-audio: false
-},
+        // constraints
+        {
+        video: true,
+        audio: false
+        },
 
-// successCallback
-function(localMediaStream) {
-video = document.querySelector('video');
-video.src = window.URL.createObjectURL(localMediaStream);
-webcamStream = localMediaStream;
-},
+        // successCallback
+        function(localMediaStream) {
+            video = document.querySelector('video');
+            video.src = window.URL.createObjectURL(localMediaStream);
+            webcamStream = localMediaStream;
+        },
 
-// errorCallback
-function(err) {
-console.log("The following error occured: " + err);
-}
-);
-} else {
-console.log("getUserMedia not supported");
-}  
+        // errorCallback
+        function(err) {
+            console.log("The following error occured: " + err);
+        }
+        );
+    } else {
+        console.log("getUserMedia not supported");
+    }  
 }
 
 function snapshot() {
 // Draws current image from the video element into the canvas
+    var imgsrc = document.getElementById("overlay");
+    
     ctx.drawImage(video, 0,0, canvas.width, canvas.height);
+    octx.drawImage(imgsrc, 0,0, overlay.width, overlay.height);
 }
 
 
@@ -96,12 +101,11 @@ function saveImg() {
     xhttp.onreadystatechange = function () {
         console.log (this.responseText);
     }
-    xhttp.send(photoshot);
-    
+    xhttp.send(photoshot); 
 }
 
 function changeOverlay (inpt) {
-   document.getElementById("camera_button").disabled = false;
+    document.getElementById("camera_button").disabled = false;
     document.getElementById("overlay").src = inpt;
     document.getElementById("overlay").style.display = "block";
 }

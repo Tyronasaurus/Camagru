@@ -34,7 +34,7 @@
             <div method="POST" class="camera_form">
                 <div class="cam">
                     <div class="overlay_div">
-                        <img src="" id="overlay">
+                        <img id="overlay">
                     </div>
                     <div class="video_div">
                         <video id="video" autoplay></video>
@@ -48,8 +48,18 @@
                 <input class="button button-block" type="submit" name="submit">
             </form>
             <h1>SCREENSHOTS</h1>
-                <canvas id="myCanvas" width="400" height="340"></canvas>
+            <div class="canvas-wrap">
+                <div class="overlay-cont">
+                    <canvas id="myOverlay"></canvas>
+                </div>
+                <div class="video-cont">
+                    <canvas id="myCanvas"></canvas>
+                </div>
+            </div>
                 <input class="button button-block" onclick="saveImg();" type="submit" name="upload">
+                <?PHP 
+
+                ?>
                 <p class="success">
                     <?PHP echo $_SESSION['uploaded']; ?>
                 </p>
@@ -57,6 +67,7 @@
         <div class="small_form">
                 <h1>OVERLAYS</h1>
                 <button class="overlay_button" id="Thuglife" onclick="changeOverlay('resources/overlays/Thuglife.png');"><img src="resources/overlays/Thuglife.png"></button>
+                <button class="overlay_button" id="spliff" onclick="changeOverlay('resources/overlays/spliff.png');"><img src="resources/overlays/spliff.png"></button>
         </div>
     </BODY>
     <script src="js/scripts.js">

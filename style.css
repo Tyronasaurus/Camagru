@@ -84,6 +84,7 @@ p a{
     margin-left: 650px;
     margin-top: -1250px;
     text-align: center;
+    position: absolute;
 }
 
 .good {
@@ -350,6 +351,7 @@ video {
 .overlay_div {
     position: absolute;
     height: 100%;
+    vertical-align: middle;
     width: 100%;
 }
 
@@ -360,42 +362,31 @@ video {
     vertical-align: middle;
     display: inline-block;
     margin: 0 auto;
-    margin-top: 55px;
+    margin-top: 75px;
 }
 
 .canvas-wrap {
+    position: relative;
     width: 442px;
     height: 335.5px;
-    display: inline-block;
+    margin: 0 auto;
     text-align: center;
 }
 
-.overlay-cont {
-    position: relative;
-    height: 100%;
-    width: 100%;
-}
-
-.video-cont {
-    width: 100%;
-    height:100%;
-}
-
 .canvas-wrap canvas {
-    top: 0;
+    position: absolute;
     left: 0;
-}
-
-#myCanvas {
-    height: 100%;
-    width: 100%;
+    top: 0;
 }
 
 #myOverlay {
-
-    vertical-align: middle;
-    display: inline-block;
-    margin: 0 auto;
-    margin-top: 55px;
     z-index: 2;
+    margin: 0 auto;
+    margin-top: 75px;
+    margin-left: 110px;
+}
+
+#myCanvas {
+    width: 442px;
+    height: 335.5px;
 }

@@ -83,8 +83,11 @@ function snapshot() {
 // Draws current image from the video element into the canvas
     var imgsrc = document.getElementById("overlay");
     
+    imgwidth = imgsrc.width;
+    imgheight = imgsrc.height;
+    octx.clearRect(0, 0, imgwidth, imgheight);
     ctx.drawImage(video, 0,0, canvas.width, canvas.height);
-    octx.drawImage(imgsrc, 0,0, overlay.width, overlay.height);
+    octx.drawImage(imgsrc, 0,0, imgwidth, imgheight);
 }
 
 
@@ -93,7 +96,9 @@ function snapshot() {
 //------------------------
 function saveImg() {
     canvas = document.getElementById("myCanvas");
+    overlay = document.getElementById("myOverlay");
     var sendcanv= canvas.toDataURL('image/png');
+    var sendov = overlay.toDataURL('image/png');
     var photoshot = 'picture=' + encodeURIComponent(JSON.stringify(sendcanv));
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", "./cheese.php", true);

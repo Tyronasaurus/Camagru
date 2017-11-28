@@ -49,16 +49,12 @@
             </form>
             <h1>SCREENSHOTS</h1>
             <div class="canvas-wrap">
-                <div class="overlay-cont">
-                    <canvas id="myOverlay"></canvas>
-                </div>
-                <div class="video-cont">
-                    <canvas id="myCanvas"></canvas>
-                </div>
+                <canvas id="myOverlay" ></canvas>
+                <canvas id="myCanvas"></canvas>
             </div>
                 <input class="button button-block" onclick="saveImg();" type="submit" name="upload">
                 <?PHP 
-
+                    
                 ?>
                 <p class="success">
                     <?PHP echo $_SESSION['uploaded']; ?>

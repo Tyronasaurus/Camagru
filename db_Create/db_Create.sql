@@ -19,5 +19,6 @@ CREATE TABLE uploads (
     `pid` INT(11) AUTO_INCREMENT NOT NULL,
     `userid` INT(11) NOT NULL,
     `file_name` VARCHAR(100) NOT NULL,
+    `date` DATE NOT NULL,
     PRIMARY KEY(`pid`)
 );

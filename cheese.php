@@ -11,8 +11,8 @@
         $fileName = uniqid('', true).".png";
         $fileDest = "uploads/".$fileName;
         file_put_contents($fileDest, $photo);
-        $stmt = $pdo->prepare('INSERT INTO uploads (userid, file_name)
-        VALUES (:userid, :file_name)');
+        $stmt = $pdo->prepare('INSERT INTO uploads (userid, file_name, date)
+        VALUES (:userid, :file_name, NOW())');
         $stmt->execute([
             'userid' => $_SESSION['uid'],
             'file_name' => $fileName]);

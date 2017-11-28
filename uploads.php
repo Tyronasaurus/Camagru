@@ -31,7 +31,7 @@
             $fileExt = explode('.', $file);
             $fileActualExt = strtolower(end($fileExt));
             if (in_array($fileActualExt, $allowed)) {
-                $stmt = $pdo->prepare('SELECT * FROM uploads WHERE file_name = :file_name');
+                $stmt = $pdo->prepare('SELECT * FROM uploads WHERE file_name = :file_name ORDER BY date DESC');
                 $stmt->execute(['file_name' => $file]);
                 $db = $stmt->fetch ();
                 $userid = $db['userid'];

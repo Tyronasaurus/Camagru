@@ -37,7 +37,7 @@
                         <img id="overlay">
                     </div>
                     <div class="video_div">
-                        <video id="video" autoplay></video>
+                        <video id="video" width=400 height=300 autoplay></video>
                     </div>
                 </div>
                 <button disabled id="camera_button" onclick="snapshot();"><img src="resources/camera.png"></button>

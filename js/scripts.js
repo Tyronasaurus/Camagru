@@ -82,11 +82,17 @@ function init() {
 function snapshot() {
 // Draws current image from the video element into the canvas
     var imgsrc = document.getElementById("overlay");
-    
+    var myCanvas = document.getElementById("myCanvas");
+    var myOverlay = document.getElementById("myOverlay");
+    myOverlay.width = imgsrc.width;
+    myOverlay.height = imgsrc.height;
+    myCanvas.width = video.width;
+    myCanvas.height = video.height;
+
     imgwidth = imgsrc.width;
     imgheight = imgsrc.height;
     octx.clearRect(0, 0, imgwidth, imgheight);
-    ctx.drawImage(video, 0,0, canvas.width, canvas.height);
+    ctx.drawImage(video, 0,0, 400, 300);
     octx.drawImage(imgsrc, 0,0, imgwidth, imgheight);
 }
 
@@ -96,9 +102,9 @@ function snapshot() {
 //------------------------
 function saveImg() {
     canvas = document.getElementById("myCanvas");
-    overlay = document.getElementById("myOverlay");
+    //overlay = document.getElementById("myOverlay");
     var sendcanv= canvas.toDataURL('image/png');
-    var sendov = overlay.toDataURL('image/png');
+    //var sendov = overlay.toDataURL('image/png');
     var photoshot = 'picture=' + encodeURIComponent(JSON.stringify(sendcanv));
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", "./cheese.php", true);

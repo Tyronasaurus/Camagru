@@ -72,7 +72,8 @@ p a{
     border-radius: 40px;
     box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
     text-align: center;
-    margin-left: 50px;
+    float: left;
+    margin-left: 400px;
 }
 
 .small_form {
@@ -81,10 +82,8 @@ p a{
     max-width: 200px;
     border-radius: 40px;
     box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
-    margin-left: 650px;
-    margin-top: -1250px;
-    text-align: center;
-    position: absolute;
+    float: left;
+    margin-top: 120px;
 }
 
 .good {
@@ -295,11 +294,7 @@ textarea {
 }
 
 .camera_form {
-    outline: none;
-    border: 0;
     border-radius: 40px;
-    align-content: center;
-    text-align: center;
     background: rgba(40, 56, 63, 0.966);
 }
 
@@ -332,61 +327,50 @@ textarea {
     margin-bottom: 50px;
     display: inline-block;
     position: relative;
-    max-width: 85%;
-    max-height: 85%;
-    text-align: center;
+    width: 400px;
+    height: 300px;
 }
 
 .video_div
-{   
-    width: 100%;
-    height: 100%;
+{
 }
 
 video {
-    height: 100%;
-    width: 100%;
+
 }
 
 .overlay_div {
     position: absolute;
-    height: 100%;
-    vertical-align: middle;
-    width: 100%;
+
 }
 
 #overlay{
     border-style: none;
     height: auto;
     width: 50%;
-    vertical-align: middle;
-    display: inline-block;
-    margin: 0 auto;
     margin-top: 75px;
+    margin-left: 110px;
 }
 
 .canvas-wrap {
+    display: inline-block;
     position: relative;
-    width: 442px;
-    height: 335.5px;
-    margin: 0 auto;
-    text-align: center;
+    width: 400px;
+    height: 300px;
 }
 
 .canvas-wrap canvas {
     position: absolute;
     left: 0;
-    top: 0;
 }
 
 #myOverlay {
+
     z-index: 2;
-    margin: 0 auto;
     margin-top: 75px;
     margin-left: 110px;
 }
 
 #myCanvas {
-    width: 442px;
-    height: 335.5px;
+
 }

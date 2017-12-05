@@ -20,5 +20,6 @@ CREATE TABLE uploads (
     `userid` INT(11) NOT NULL,
     `file_name` VARCHAR(100) NOT NULL,
     `date` DATE NOT NULL,
+    `likes` INT(11),
     PRIMARY KEY(`pid`)
 );

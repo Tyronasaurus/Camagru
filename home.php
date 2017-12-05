@@ -28,6 +28,27 @@
                 Logged in as <?PHP echo $name; ?>
             </div>
         </div>
+        <div class="user_ul">
+        <h1>Your Uploads</h1>
+        <?PHP 
+            $uid = $_SESSION[uid];
+            $stmt = $pdo->prepare('SELECT file_name FROM uploads WHERE userid = :uid');
+            $stmt->execute(['uid' => $uid]);
+            $db_row = $stmt->rowCount();
+            if ($db_row > 0) {
+                $db = $stmt->fetchAll();
+                $count = 0;
+                while ($db[$count]['file_name']) {
+                    $db_file = $db[$count]['file_name'];
+                    echo "<img class=user_imgs src=uploads/$db_file>"."</br>";
+                    $count++;
+                }
+            }
+            else {
+                echo "You have no uploads. Post a picture to see it here!";
+            }            
+        ?>
+        </div>
         <div class="home_form">
             <h3>Upload</h3>
             

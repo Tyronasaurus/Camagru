@@ -10,7 +10,7 @@
     $stmt->execute(['email' => $email]);
     $db = $stmt->fetch();
 
-    if ($email = $db['email']) && ($db['password'] = $password) {
+    if (($email = $db['email']) && ($db['password'] = $password)) {
             header("location: home.php");
     }
     else {

@@ -120,3 +120,14 @@ function changeOverlay (inpt) {
     document.getElementById("overlay").src = inpt;
     document.getElementById("overlay").style.display = "block";
 }
+
+function like (currentSource) {
+    if (currentSource === "resources/like.png") {
+        document.getElementById("like").src = "resources/unlike.png";
+    }
+    else {
+        if (currentSource === "resources/unlike.png") {
+            document.getElementById("like").src = "resources/like.png";
+        }
+    }
+}

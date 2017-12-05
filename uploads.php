@@ -45,6 +45,10 @@
                     echo "Unknown"."<br />";
                 }
                 echo "<img class=images src=uploads/$file>" . "<br />";
+                echo "  
+                        <form>
+                            <button id='like_button' onclick='like('resources/like.png');'> <img id=like src='resources/like.png'> </button>
+                        </form>";
            }
         }
     ?>

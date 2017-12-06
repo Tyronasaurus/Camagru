@@ -82,12 +82,10 @@ function init() {
 function snapshot() {
 // Draws current image from the video element into the canvas
     var imgsrc = document.getElementById("overlay");
-    var myCanvas = document.getElementById("myCanvas");
-    var myOverlay = document.getElementById("myOverlay");
-    myOverlay.width = imgsrc.width;
-    myOverlay.height = imgsrc.height;
-    myCanvas.width = video.width;
-    myCanvas.height = video.height;
+    overlay.width = imgsrc.width;
+    overlay.height = imgsrc.height;
+    canvas.width = video.width;
+    canvas.height = video.height;
 
     imgwidth = imgsrc.width;
     imgheight = imgsrc.height;
@@ -101,14 +99,15 @@ function snapshot() {
 //SAVE PHOTO FROM CANVAS |
 //------------------------
 function saveImg() {
-    canvas = document.getElementById("myCanvas");
-    //overlay = document.getElementById("myOverlay");
-    var sendcanv= canvas.toDataURL('image/png');
-    //var sendov = overlay.toDataURL('image/png');
-    var photoshot = 'picture=' + encodeURIComponent(JSON.stringify(sendcanv));
+
+    var sendcanv = canvas.toDataURL('image/png');
+    var sendov = overlay.toDataURL('image/png');
+   
+    var photoshot = 'picture=' + encodeURIComponent(JSON.stringify(sendcanv)) + '&overlay=' + encodeURIComponent(JSON.stringify(sendov));
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", "./cheese.php", true);
     xhttp.setRequestHeader ("Content-type", "application/x-www-form-urlencoded");
+
     xhttp.onreadystatechange = function () {
         console.log (this.responseText);
     }

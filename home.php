@@ -75,7 +75,7 @@
             </div>
                 <input class="button button-block" onclick="saveImg();" type="submit" name="upload">
                 <?PHP 
-                    
+                      
                 ?>
                 <p class="success">
                     <?PHP echo $_SESSION['uploaded']; ?>

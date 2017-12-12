@@ -34,8 +34,8 @@
             imagepng($dest, $fileDest);
 
             file_put_contents($fileDest, $dest);
-            $stmt = $pdo->prepare('INSERT INTO uploads (userid, file_name, date)
-            VALUES (:userid, :file_name, NOW())');
+            $stmt = $pdo->prepare('INSERT INTO uploads (userid, file_name, `date`)
+            VALUES (:userid, :file_name, CURRENT_TIMESTAMP)');
             $stmt->execute([
                 'userid' => $_SESSION['uid'],
                 'file_name' => $fileName]);

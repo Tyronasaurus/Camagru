@@ -6,8 +6,7 @@ USE accounts;
 
 CREATE TABLE users (
     `uid` int(11) AUTO_INCREMENT NOT NULL,
-    `first_name` VARCHAR(50) NOT NULL,
-    `last_name` VARCHAR(50) NOT NULL,
+    `username` VARCHAR(50) NOT NULL,
     `email` VARCHAR (255) NOT NULL,
     `password` VARCHAR(1000) NOT NULL,
     `verifid` INT(11) NOT NULL,
@@ -19,7 +18,21 @@ CREATE TABLE uploads (
     `pid` INT(11) AUTO_INCREMENT NOT NULL,
     `userid` INT(11) NOT NULL,
     `file_name` VARCHAR(100) NOT NULL,
-    `date` DATE NOT NULL,
+    `date` TIMESTAMP NOT NULL,
     `likes` INT(11),
     PRIMARY KEY(`pid`)
+);
+
+CREATE TABLE comments (
+    `pid` INT(11) NOT NULL,
+    `userid` INT(11) NOT NULL,
+    `comment_data` VARCHAR(1000) NOT NULL,
+    PRIMARY KEY(`pid`)
+);
+
+CREATE TABLE likes (
+    `pid` INT(11) NOT NULL,
+    `userid` INT(11) NOT NULL,
+    `id` INT(11) NOT NULL AUTO_INCREMENT,
+    PRIMARY KEY(`id`)
 );

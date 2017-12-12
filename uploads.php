@@ -15,6 +15,7 @@
         <div class="nav">
             <a href="home.php">HOME</a>   |   
             <a href="uploads.php">UPLOADS</a>   |   
+            <a href="profile.php">PROFILE</a>   |   
             <a href="index.php">LOG OUT</a>
         </div>
         <div class="welcome">
@@ -31,15 +32,15 @@
             $fileExt = explode('.', $file);
             $fileActualExt = strtolower(end($fileExt));
             if (in_array($fileActualExt, $allowed)) {
-                $stmt = $pdo->prepare('SELECT * FROM uploads WHERE file_name = :file_name ORDER BY date DESC');
+                $stmt = $pdo->prepare('SELECT * FROM uploads WHERE file_name = :file_name ORDER BY `date` DESC');
                 $stmt->execute(['file_name' => $file]);
                 $db = $stmt->fetch ();
                 $userid = $db['userid'];
-                $stmt = $pdo->prepare('SELECT * FROM users WHERE uid = :uid');
+                $stmt = $pdo->prepare('SELECT * FROM users WHERE `uid` = :uid');
                 $stmt->execute(['uid' => $userid]);
                 $db = $stmt->fetch ();
                 if (isset($db['uid'])) {
-                    echo $db['first_name'] . "<br />";
+                    echo $db['username'] . "<br />";
                 }
                 else {
                     echo "Unknown"."<br />";

@@ -397,3 +397,12 @@ video {
     background: none;
     border: none;
 }
+
+.profile {
+    color: rgb(3, 122, 151);
+}
+
+.change {
+    font-size: 25px;
+    color: rgb(3, 122, 151);
+}

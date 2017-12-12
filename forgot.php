@@ -1,6 +1,10 @@
-<?PHP
-    include 'config/database.php';
+<!DOCTYPE HTML>
 
+<?PHP
+    session_start ();
+    include 'config/database.php';
+    $_SESSION['succheader'] = '';
+    $_SESSION['succbody'] = '';
     $_SESSION['email'] = $_POST['email'];
     $_SESSION['error'] = "";
     $email = $_POST['email'];
@@ -23,15 +27,14 @@
         mail($email, "Password Reset", $message_body, "From: donotreply@cheeseprod.com");
         $_SESSION['succheader'] = "Password Reset";
         $_SESSION['succbody'] = "Please follow the link sent to $email to reset your password"; 
+    
         header("location: success.php");
     }
     else {
         $_SESSION['error'] = "Invalid email address";
     }
-        
 ?>
 
-<!DOCTYPE HTML>
 <HTML>
     <HEAD>
     <link rel="stylesheet" type="text/css" href="style.css">
@@ -48,13 +51,13 @@
         </div>
         <div class="form">
             <h1>RESET YOUR PASSWORD</h1>
-            <form action="forgot.php" method="POST" autocomplete="off">
+            <form method="POST" autocomplete="off">
                 <div class="field-wrap">
                     <input type="email" placeholder="Email Address" name="email">
                 </div>
                 <button class="button button-block" name="forgot">CONTINUE</button>
+                
             </form>
         </div>
     </BODY>
-    
 </HTML>

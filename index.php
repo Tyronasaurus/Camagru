@@ -39,11 +39,9 @@
         }
         else if (isset($_POST['signup'])) {
             $_SESSION['email'] = $_POST['email'];
-            $_SESSION['first_name'] = $_POST['first_name'];
-            $_SESSION['last_name'] = $_POST['last_name'];
+            $_SESSION['username'] = $_POST['username'];
         
-            $first_name = $_POST['first_name'];
-            $last_name = $_POST['last_name'];
+            $username = $_POST['username'];
             $email = $_POST['email'];
             //Encrypts password and user hash(pk)
             $password = hash("whirlpool", $_POST['password']);
@@ -60,18 +58,17 @@
             }
             //User doesnt exist. Continues
             else {
-                $stmt = $pdo->prepare('INSERT INTO users (first_name, last_name, email, password, verifid)
-                                        VALUES (:first_name, :last_name, :email, :password, :verifid)');
+                $stmt = $pdo->prepare('INSERT INTO users (username, email, password, verifid)
+                                        VALUES (:username, :email, :password, :verifid)');
                 $stmt->execute([
-                'first_name' => $first_name,
-                'last_name' => $last_name,
+                'username' => $username,
                 'email' => $email,
                 'password' => $password,
                 'verifid' => $verifid]);
         
                 $subject = 'Registration to Cheese';
                 $message_body = "
-                Hello ".$first_name."
+                Hello ".$username."
                 
                 Please click the link below to verify your account.
                 
@@ -136,10 +133,7 @@
             
             <form method="POST" autocomplete="off">
                 <div class="field-wrap">
-                    <input type="text" placeholder="First Name" name="first_name">
-                </div>
-                <div class="field-wrap">
-                    <input type="text" placeholder="Last Name" name="last_name">
+                    <input type="text" placeholder="User Name" name="username">
                 </div>
                 <div class="field-wrap">
                     <input type="email" placeholder="Email Address" name="email">
@@ -155,40 +149,6 @@
     </div>
     </BODY>
     <script src="js/scripts.js">
-    /*    function hidelabel(lname, element) {
-            if (element.value.length > 0) {
-                document.getElementById(lname).style.visibility = "hidden";
-            }
-            else if {
-                document.getElementById(lname).style.visibility = "visible";
-            }
-        }
 
-        function openTab(tabName, element) {
-            var i, tabcontent, tablinks;
-
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = 'none';
-            }
-
-            // Remove the background color of all tablinks/buttons
-            tablinks = document.getElementsByClassName("tablink");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].style.backgroundColor = "";
-            }
-
-            // Show the specific tab content
-            document.getElementById(tabName).style.display = "block";
-
-            // Add the specific color to the button used to open the tab content
-            element.style.backgroundColor = "rgba(80, 113, 128, 0.966)";
-            element.style.color = "#ffffff";
-            element.style.textShadow = "2px 2px #2c2c2c";
-        }
-
-        // Get the element with id="defaultOpen" and click on it
-        document.getElementById("defaultOpen").click();
-        */
     </script>
 </HTML>

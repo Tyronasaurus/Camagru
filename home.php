@@ -8,7 +8,7 @@
     $stmt = $pdo->prepare('SELECT * FROM users WHERE email = :email');
     $stmt->execute(['email' => $email]);
     $db = $stmt->fetch();
-    $name = $db['first_name'];
+    $name = $db['username'];
 ?>
 
 <HTML>
@@ -22,6 +22,7 @@
             <div class="nav">
                 <a href="home.php">HOME</a>   |   
                 <a href="uploads.php">UPLOADS</a>   |   
+                <a href="profile.php">PROFILE</a>   |   
                 <a href="index.php">LOG OUT</a>
             </div>
             <div class="welcome">
@@ -74,9 +75,6 @@
                 <canvas id="myCanvas"></canvas>
             </div>
                 <input class="button button-block" onclick="saveImg();" type="submit" name="upload">
-                <?PHP 
-                      
-                ?>
                 <p class="success">
                     <?PHP echo $_SESSION['uploaded']; ?>
                 </p>

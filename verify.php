@@ -16,12 +16,12 @@
             header("location: success.php");
         }
         else {
-            $_SESSION['message'] = "fuck idk";
+            $_SESSION['message'] = "Please try retry";
             header("location: error.php");
         }
     }
     else {
-        $_SESSION['message'] = "fuck idk";
+        $_SESSION['message'] = "Fatal Error. The world is gonna end";
         header("location: error.php");
     }
 

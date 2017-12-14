@@ -100,6 +100,7 @@ p a{
     box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
     float: left;
     margin-top: 120px;
+
 }
 
 .good {
@@ -155,7 +156,10 @@ h4 {
     color: #b69834;
     text-align: center;
     font-size: 250%;
+}
 
+h5 {
+    font-size: 11px;
 }
 
 @font-face {
@@ -405,4 +409,13 @@ video {
 .change {
     font-size: 25px;
     color: rgb(3, 122, 151);
+}
+
+.comment_block {
+    width: 400px;
+    font-size: 25px;
+    background-color: rgb(3, 122, 151);
+    border-radius: 40px;
+    padding: 25px;
+    text-align: center;
 }

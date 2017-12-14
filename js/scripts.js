@@ -22,7 +22,7 @@ function openTab(tabName, element) {
 }
 
 // Get the element with id="defaultOpen" and click on it
-document.getElementById("defaultOpen").click();
+//document.getElementById("defaultOpen").click();
 
 // CAMERA
 
@@ -120,13 +120,13 @@ function changeOverlay (inpt) {
     document.getElementById("overlay").style.display = "block";
 }
 
-function like (currentSource) {
-    if (currentSource === "resources/like.png") {
-        document.getElementById("like").src = "resources/unlike.png";
-    }
-    else {
-        if (currentSource === "resources/unlike.png") {
-            document.getElementById("like").src = "resources/like.png";
-        }
-    }
-}
+// function like (currentSource) {
+//     if (currentSource === "resources/like.png") {
+//         document.getElementById("like").src = "resources/unlike.png";
+//     }
+//     else {
+//         if (currentSource === "resources/unlike.png") {
+//             document.getElementById("like").src = "resources/like.png";
+//         }
+//     }
+// }

@@ -2,6 +2,7 @@
 <?PHP 
     session_start();
     include 'config/database.php';
+    $name = $_SESSION['username'];
 ?>
 
 <HTML>
@@ -32,25 +33,31 @@
             $fileExt = explode('.', $file);
             $fileActualExt = strtolower(end($fileExt));
             if (in_array($fileActualExt, $allowed)) {
-                $stmt = $pdo->prepare('SELECT * FROM uploads WHERE file_name = :file_name ORDER BY `date` DESC');
+                $stmt = $pdo->prepare('SELECT * FROM uploads WHERE file_name = :file_name ORDER BY `date` ASC');
                 $stmt->execute(['file_name' => $file]);
                 $db = $stmt->fetch ();
                 $userid = $db['userid'];
+                $pid = $db['pid'];
                 $stmt = $pdo->prepare('SELECT * FROM users WHERE `uid` = :uid');
                 $stmt->execute(['uid' => $userid]);
                 $db = $stmt->fetch ();
-                if (isset($db['uid'])) {
-                    echo $db['username'] . "<br />";
-                }
-                else {
-                    echo "Unknown"."<br />";
-                }
-                echo "<img class=images src=uploads/$file>" . "<br />";
-                echo "  
-                        <form>
-                            <button id='like_button' onclick='like('resources/like.png');'> <img id=like src='resources/like.png'> </button>
-                        </form>";
-           }
+                $newstmt = $pdo->prepare('SELECT * from likes WHERE pid = :pid');
+                $newstmt->execute(['pid' => $pid]);
+                $count = $newstmt->rowCount();
+                if (isset($db['uid'])) { ?>
+                    <div>
+                        <form method='POST' action="likepic.php">
+                            <?PHP echo $name?> </br>
+                            <img class=images src=uploads/<?= $file ?>>
+                            <button value=<?= $pid ?> name='like' id='like_button'><img id=like src='resources/like.png'></button>
+                            <?PHP echo $count; ?>
+                        </form>
+                        <form method="POST" action="comments.php">
+                            <button class="button button-block" value=<?= $pid ?> name="comments">View Comments</button>
+                        </form>
+                    </div> </br>
+                <?PHP }
+            }
         }
     ?>
     </h4>

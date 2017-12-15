@@ -2,7 +2,9 @@
 <?PHP 
     session_start();
     include 'config/database.php';
-    $name = $_SESSION['username'];
+    if ($_SESSION['username'] != NULL) {
+        $name = $_SESSION['username'];
+    }
 ?>
 
 <HTML>
@@ -20,8 +22,12 @@
             <a href="index.php">LOG OUT</a>
         </div>
         <div class="welcome">
-            Logged in as <?PHP echo $name; ?>
-        </div>
+            <?PHP if ($name != NULL) { ?>
+                Logged in as <?PHP echo $name;?>
+            <?PHP } else { ?>
+                Not logged in
+            <?PHP } ?> 
+        </div>  
     </div>
     <div class="form">
     <h3>UPLOADS</h3>

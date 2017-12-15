@@ -1,25 +1,19 @@
 <?PHP
-    include "config/database.php";
     session_start ();
-    $currentuser = $_SESSION['uid'];
+    include "config/database.php";
 
-    if (($_POST['like']) != NULL) {
-        $pid = $_POST['like'];
-        $stmt = $pdo->prepare('SELECT * FROM likes WHERE pid = :pid AND userid = :userid');
+    if (($_POST['message'] != NULL) && ($_POST['submit'] != NULL)) {
+        $message = $_POST['message'];
+        $uid = $_SESSION['uid'];
+        $pid = $_SESSION['pid'];
+        $stmt = $pdo->prepare('INSERT INTO comments (pid, userid, comment_data)
+                                VALUES (:pid, :userid, :comment_data)');
         $stmt->execute([
             'pid' => $pid,
-            'userid' => $currentuser]);
-        $ifliked = $stmt->fetch();
-        if ($ifliked['id'] == NULL) {
-            $stmt = $pdo->prepare('INSERT INTO likes (pid, userid, id)
-                                    VALUES (:pid, :userid, NULL)');
-            $stmt->execute([
-                'pid' => $pid,
-                'userid' => $currentuser]);
-        }
-
+            'userid' => $uid,
+            'comment_data' => $message]);
         $stmt = $pdo->prepare('SELECT * FROM users WHERE uid = :uid');
-        $stmt->execute(['uid' => $currentuser]);
+        $stmt->execute(['uid' => $uid]);
         $db = $stmt->fetch();
         if ($db['email_notif'] == 1) {
             $stmt = $pdo->prepare('SELECT * FROM uploads WHERE pid = :pid');
@@ -33,10 +27,9 @@
             
 
             $subject = "Uploaded Image";
-            $message_body = 'Say Cheese! Someone has liked your picture!';
+            $message_body = 'Say Cheese! Someone has commented on your picture!';
             mail($send_to, $subject, $message_body, 'From: donotreply@cheeseprod.com');
         }
     }
-    header("location: uploads.php");
-
+    header("location: comments.php");
 ?>

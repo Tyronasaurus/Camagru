@@ -11,6 +11,7 @@ CREATE TABLE users (
     `password` VARCHAR(1000) NOT NULL,
     `verifid` INT(11) NOT NULL,
     `active` BOOLEAN NOT NULL DEFAULT 0,
+    `email_notif` BOOLEAN NOT NULL DEFAULT 1,
     PRIMARY KEY (`uid`)
 );
 
@@ -19,7 +20,6 @@ CREATE TABLE uploads (
     `userid` INT(11) NOT NULL,
     `file_name` VARCHAR(100) NOT NULL,
     `date` TIMESTAMP NOT NULL,
-    `likes` INT(11),
     PRIMARY KEY(`pid`)
 );
 
@@ -27,7 +27,8 @@ CREATE TABLE comments (
     `pid` INT(11) NOT NULL,
     `userid` INT(11) NOT NULL,
     `comment_data` VARCHAR(1000) NOT NULL,
-    PRIMARY KEY(`pid`)
+    `id` INT(11) NOT NULL AUTO_INCREMENT,
+    PRIMARY KEY(`id`)
 );
 
 CREATE TABLE likes (

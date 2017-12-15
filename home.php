@@ -26,7 +26,11 @@
                 <a href="index.php">LOG OUT</a>
             </div>
             <div class="welcome">
-                Logged in as <?PHP echo $name; ?>
+                <?PHP if ($name != NULL) { ?>
+                    Logged in as <?PHP echo $name;?>
+                <?PHP } else { ?>
+                    Not logged in
+                <?PHP } ?> 
             </div>
         </div>
         <div class="user_ul">
@@ -40,11 +44,12 @@
                 $db = $stmt->fetchAll();
                 $count = 0;
                 while ($db[$count]['file_name']) {
-                    $db_file = $db[$count]['file_name'];
-                    echo "<img class=user_imgs src=uploads/$db_file>"."</br>";
-                    echo "<form method=POST>
-                            <button name='delete' value=$db_file class='deleteimg'>DELETE</button>
-                        </form> </br>";
+                    $db_file = $db[$count]['file_name']; ?>
+                    <img class=user_imgs src=uploads/<?= $db_file ?>> </br>
+                    <form method=POST action="delete.php">
+                            <button name='delete' value=<?= $db_file ?> class='deleteimg'>DELETE</button>
+                        </form> </br>
+                    <?PHP
                     $count++;
                 }
             }

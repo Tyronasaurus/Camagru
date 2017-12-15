@@ -8,7 +8,13 @@
     $stmt->execute(['email' => $email]);
     $db = $stmt->fetch();
     $name = $db['username'];
-    
+    $emailnotif = $db['email_notif'];
+    if ($emailnotif == 1) {
+        $checked = 'ON';
+    }
+    else {
+        $checked = 'OFF';
+    }
 ?>
 
 <HTML>
@@ -26,7 +32,11 @@
                 <a href="index.php">LOG OUT</a>
             </div>
             <div class="welcome">
-                Logged in as <?PHP echo $name; ?>
+                <?PHP if ($name != NULL) { ?>
+                    Logged in as <?PHP echo $name;?>
+                <?PHP } else { ?>
+                    Not logged in
+                <?PHP } ?> 
             </div>
             <div class="form">
                 <h3>YOUR PROFILE</h3>
@@ -40,6 +50,11 @@
                     EMAIL ADDRESS </br>
                     <div class="profile">
                         <?PHP echo $email; ?> </br>
+                    </div>
+                    </br>
+                    NOTIFICATIONS <br>
+                    <div class="profile">
+                        <?= $checked ?>
                     </div>
                     </br>
                     <a href="editprof.php"><button class="button button-block" name="change">EDIT</button></a>

@@ -8,7 +8,14 @@
     $stmt->execute(['email' => $email]);
     $db = $stmt->fetch();
     $name = $db['username'];
-    $uid = $db['uid'];    
+    $uid = $db['uid'];
+    $emailnotif = $db['email_notif'];
+    if ($emailnotif == 1) {
+        $checked = 'checked';
+    }
+    else {
+        $checked = '';
+    }
 ?>
 
 <HTML>
@@ -29,7 +36,7 @@
                 Logged in as <?PHP echo $name; ?>
             </div>
             <div class="form">
-                <form method="POST">
+                <form method="POST" action="emailnotif.php">
                     <h3>YOUR PROFILE</h3>
                     </br>
                     <h1>
@@ -37,29 +44,16 @@
                         <div class="profile">
                             <input type="text" value="<?PHP echo $name; ?>" placeholder="User Name" name="username" > </br>
                         </div>
-                        </br>
                         EMAIL ADDRESS </br>
                         <div class="profile">
                             <input type="email" value="<?PHP echo $email; ?>" placeholder="Email Address" name="email"> </br>
                         </div>
-                        </br>
+                        NOTIFICATIONS </br>
+                        <div class="checkbox">
+                            <input type="checkbox" value="1" id="checkboxinput" name="checkbox" <?= $checked ?>/>
+                            <label for="checkboxinput"></label>
+                        </div> </br>
                         <button class="button button-block" name="change">SUBMIT</button>
-                        <?PHP 
-                            $newname = $_POST['username'];
-                            $newmail = $_POST['email'];
-                            if ($newname == NULL) {
-                                $newname = $name;
-                            }
-                            if ($newmail == NULL) {
-                                $newmail = $email;
-                            }
-                            $stmt = $pdo->prepare('UPDATE users SET username=:username, email=:email WHERE uid=:userid');
-                            $stmt->execute([
-                                'username' => $newname,
-                                'email' => $newmail,
-                                'userid' => $uid
-                            ]);
-                        ?>
                     </h1>
                     <p class="change"> <a href="forgot.php">Change Password</a> </p>
                 </form>

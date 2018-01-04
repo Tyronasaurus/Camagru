@@ -29,7 +29,7 @@
                 <a href="home.php">HOME</a>   |   
                 <a href="uploads.php">UPLOADS</a>   |   
                 <a href="profile.php">PROFILE</a>   |   
-                <a href="index.php">LOG OUT</a>
+                <a href="logout.php">LOG OUT</a>
             </div>
             <div class="welcome">
                 <?PHP if ($name != NULL) { ?>

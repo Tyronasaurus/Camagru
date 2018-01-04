@@ -3,6 +3,9 @@
 <?PHP
     session_start();
     include 'config/database.php';
+    if ($_SESSION['email'] == NULL) {
+        header('location: index.php?error=notloggedin');
+    }
     $email = $_SESSION['email'];
     $_SESSION['uploaded'] = "";
     $stmt = $pdo->prepare('SELECT * FROM users WHERE email = :email');
@@ -23,7 +26,7 @@
                 <a href="home.php">HOME</a>   |   
                 <a href="uploads.php">UPLOADS</a>   |   
                 <a href="profile.php">PROFILE</a>   |   
-                <a href="index.php">LOG OUT</a>
+                <a href="logout.php">LOG OUT</a>
             </div>
             <div class="welcome">
                 <?PHP if ($name != NULL) { ?>
@@ -72,11 +75,8 @@
                 </div>
                 <button disabled id="camera_button" onclick="snapshot();"><img src="resources/camera.png"></button>
             </div>
+            </br>
             <!-- Choose File -->
-            <form action="upload.php" method="POST" enctype="multipart/form-data">
-                <input class="button button-block" type="file" name="file">
-                <input class="button button-block" type="submit" name="submit">
-            </form>
             <h1>SCREENSHOTS</h1>
             <div class="canvas-wrap">
                 <canvas id="myOverlay" ></canvas>
@@ -86,6 +86,12 @@
                 <p class="success">
                     <?PHP echo $_SESSION['uploaded']; ?>
                 </p>
+            <div class='camera_form'>
+                <form action="upload.php" method="POST" enctype="multipart/form-data">
+                    <input class="button button-block" type="file" name="file">
+                    <input class="button button-block" type="submit" name="submit">
+                </form>
+            </div>
         </div>
         <div class="small_form">
                 <h1>OVERLAYS</h1>

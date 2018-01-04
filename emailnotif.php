@@ -1,9 +1,12 @@
 <?PHP
     session_start ();
+
     include 'config/database.php';
     $uid = $_SESSION['uid'];
-    $newname = $_POST['username'];
-    $newmail = $_POST['email'];
+    $name = $_SESSION['username'];
+    $email = $_SESSION['email'];
+    $newname = strip_tags($_POST['username']);
+    $newmail = strip_tags($_POST['email']);
     if ($newname == NULL) {
         $newname = $name;
     }
@@ -23,5 +26,7 @@
         'userid' => $uid,
         'email_notif' => $email_notif
     ]);
+    $_SESSION['email'] = $newmail;
+    $_SESSION['username'] = $newname;
     header("location: profile.php");
 ?>

@@ -30,7 +30,7 @@
                 <a href="home.php">HOME</a>   |   
                 <a href="uploads.php">UPLOADS</a>   |   
                 <a href="profile.php">PROFILE</a>   |   
-                <a href="index.php">LOG OUT</a>
+                <a href="logout.php">LOG OUT</a>
             </div>
             <div class="welcome">
                 Logged in as <?PHP echo $name; ?>
@@ -38,6 +38,10 @@
             <div class="form">
                 <form method="POST" action="emailnotif.php">
                     <h3>YOUR PROFILE</h3>
+
+                    <div class=note>
+                        Note: usernames are not required to be unique.
+                    </div>
                     </br>
                     <h1>
                         USERNAME </br>

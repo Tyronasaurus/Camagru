@@ -19,12 +19,18 @@
 <BODY>
     <div class="header">
         <h2>CHEESE!</h2>
-        <div class="nav">
-            <a href="home.php">HOME</a>   |   
-            <a href="uploads.php">UPLOADS</a>   |   
-            <a href="profile.php">PROFILE</a>   |   
-            <a href="index.php">LOG OUT</a>
-        </div>
+        <?PHP if (isset($_SESSION['uid'])) {;?>
+            <div class="nav">
+                <a href="home.php">HOME</a>   |   
+                <a href="uploads.php">UPLOADS</a>   |   
+                <a href="profile.php">PROFILE</a>   |   
+                <a href="logout.php">LOG OUT</a>
+            </div>
+            <?PHP } else { ?>
+            <div class="nav">
+                <a href='index.php'> SIGN UP </a>
+            </div>
+            <?PHP } ?>
         <div class="welcome">
             <?PHP if ($name != NULL) { ?>
                 Logged in as <?PHP echo $name;?>
@@ -42,10 +48,14 @@
             $picture = $db['file_name'];
         ?>
         <img src=uploads/<?= $picture ?>>
+        <?PHP 
+            if (isset($_SESSION['uid'])) {
+        ?>
         <form method="POST" action="postcomment.php">
             <textarea name="message" placeholder="Write a comment..."></textarea> </br>
             <input class="button button-block" type="submit" name="submit"></input>
         </form>
+            <?PHP } ?>
         </br>
             <?PHP
                 $stmt = $pdo->prepare('SELECT * FROM comments WHERE pid = :pid');

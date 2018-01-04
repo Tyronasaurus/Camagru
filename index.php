@@ -1,18 +1,19 @@
 <!DOCTYPE HTML>
 <?PHP
     session_start ();
+    echo $_SESSION['uid'];
+    echo $_POST['password'];
     $_SESSION['error'] = '';
     $_SESSION['success'] = '';
     include 'config/database.php';
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (isset($_POST['login'])) {
-            $_SESSION['email'] = $_POST['email'];
             $_SESSION['password'] = $_POST['password'];
             $_SESSION['hash'] = $_POST['hash'];
         
             $email = $_POST['email'];
-            $password = hash("whirlpool", $_SESSION['password']);
+            $password = hash("whirlpool", $_POST['password']);
             $hash = $_POST['hash'];
         
             $stmt = $pdo->prepare('SELECT * FROM users WHERE email = :email');
@@ -23,6 +24,8 @@
                 if ($password == $db['password']) {
                     if ($db['active'] == 1) {
                         $_SESSION['uid'] = $db['uid'];
+                        $_SESSION['username'] = $db['username'];
+                        $_SESSION['email'] = $db['email'];
                         header("location: home.php");
                     }
                     else {
@@ -38,13 +41,29 @@
             }
         }
         else if (isset($_POST['signup'])) {
-            $_SESSION['email'] = $_POST['email'];
-            $_SESSION['username'] = $_POST['username'];
         
-            $username = $_POST['username'];
+            $username = strip_tags($_POST['username']);
             $email = $_POST['email'];
             //Encrypts password and user hash(pk)
-            $password = hash("whirlpool", $_POST['password']);
+            $pattern = "^(?=.*[A-Z]+)\S{6,}$";
+            $password = $_POST['password'];
+            $password_check = preg_match('/^[a-zA-Z0-9!@#$%^&*()_]{4,200}$/i', $password);
+            if (!preg_match('/[A-Z]/', $password))
+            {
+                header("Location: index.php?password=noUpper");
+                exit();
+            }
+            if (!preg_match('/[a-z]/', $password))
+            {
+                header("Location: index.php?password=noLower");
+                exit();
+            }
+            if (!$password_check)
+            {
+                header("Location: index.php?password=invalid");
+                exit();
+            }
+            $password = hash("whirlpool", $password);
             $verifid = rand();
             //Query to check email existence
             
@@ -93,13 +112,19 @@
     
     <BODY>
     <div class="header">
+        <div>
             <h3>CHEESE!</h3>
+        </div>
+        <div class='public'>
+                <a href="uploads.php">PUBLIC GALLERY</a>
+            </div>
             <p class="error">
                 <?PHP echo $_SESSION['error']; ?>
             </p>
             <p class="success">
                 <?PHP echo $_SESSION['success']; ?>
             </p>
+
         </div>
     <div class="form">
         <a href="#signup">

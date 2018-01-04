@@ -2,9 +2,11 @@
 <?PHP 
     session_start();
     include 'config/database.php';
-    if ($_SESSION['username'] != NULL) {
+    echo $_SESSION['uid'];
+    if (isset($_SESSION['username'])) {
         $name = $_SESSION['username'];
     }
+    else { $name = '';}
 ?>
 
 <HTML>
@@ -15,19 +17,25 @@
 <BODY>
     <div class="header">
         <h2>CHEESE!</h2>
+        <?PHP if (isset($_SESSION['uid'])) {;?>
         <div class="nav">
             <a href="home.php">HOME</a>   |   
             <a href="uploads.php">UPLOADS</a>   |   
             <a href="profile.php">PROFILE</a>   |   
-            <a href="index.php">LOG OUT</a>
+            <a href="logout.php">LOG OUT</a>
         </div>
+        <?PHP } else { ?>
+        <div class="nav">
+            <a href='index.php'> SIGN UP </a>
+        </div>
+        <?PHP } ?>
         <div class="welcome">
             <?PHP if ($name != NULL) { ?>
                 Logged in as <?PHP echo $name;?>
             <?PHP } else { ?>
                 Not logged in
             <?PHP } ?> 
-        </div>  
+        </div>
     </div>
     <div class="form">
     <h3>UPLOADS</h3>
@@ -55,11 +63,16 @@
                         <form method='POST' action="likepic.php">
                             <?PHP echo $name?> </br>
                             <img class=images src=uploads/<?= $file ?>>
+                            <?PHP 
+                                if (isset($_SESSION['uid'])) {?>
                             <button value=<?= $pid ?> name='like' id='like_button'><img id=like src='resources/like.png'></button>
+                                <?PHP ;} else {?>
+                                    <button name='like' id='like_button'><image id=like src='resources/unlike.png'><br>
+                            <?PHP ;} ?>
                             <?PHP echo $count; ?>
                         </form>
                         <form method="POST" action="comments.php">
-                            <button class="button button-block" value=<?= $pid ?> name="comments">View Comments</button>
+                            <button class="button button-block" value=<?= $pid ?> name="comments">Comments</button>
                         </form>
                     </div> </br>
                 <?PHP }

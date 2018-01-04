@@ -3,7 +3,7 @@
     include "config/database.php";
 
     if (($_POST['message'] != NULL) && ($_POST['submit'] != NULL)) {
-        $message = $_POST['message'];
+        $message = strip_tags($_POST['message']);
         $uid = $_SESSION['uid'];
         $pid = $_SESSION['pid'];
         $stmt = $pdo->prepare('INSERT INTO comments (pid, userid, comment_data)
